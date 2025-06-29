@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+
+@font-face {
+  font-family: 'prata-regular';
+  src: url('/fonts/Prata-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.prata-regular{
+  font-family: 'prata-regular', sans-serif;
+}
