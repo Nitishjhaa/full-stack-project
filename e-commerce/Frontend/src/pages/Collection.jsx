@@ -7,13 +7,27 @@ import Title from '../components/Title'
 const Collection = () => {
 
   const { products } = useContext(ShopContext)
-  const [showFilter, setShowFilter] = useState(false)
+  const [showFilter, setShowFilter] = useState(false);
+  const [allProducts, setAllProducts] = useState([]);
+  const [catogery, setCatogery] = useState([]);
+  const [subCatogery, setSubCatogery] = useState([])
 
-  const [allProducts, setAllProducts] = useState([])
+  const toggleCatogery = (e) => {
+    if(catogery.includes(e.target.value)) {
+      setCatogery(prev => prev.filter(item => item !== e.target.value))
+    }
+    else {
+      setCatogery( prev => [...prev, e.target.value])
+    }
+  }
 
   useEffect(() => {
     setAllProducts(products)
   }, [])
+
+  useEffect(() => {
+    console.log(catogery)
+  }, [catogery])
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 border-t' >
@@ -29,13 +43,13 @@ const Collection = () => {
           <p className='uppercase font-semibold text-sm mb-3'>Catogery</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Men'} />Men
+              <input type="checkbox" name="" id="" className='w-3' value={'Men'} onChange={toggleCatogery} />Men
             </p>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Women'} />Women
+              <input type="checkbox" name="" id="" className='w-3' value={'Women'} onChange={toggleCatogery} />Women
             </p>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Kids'} />Kids
+              <input type="checkbox" name="" id="" className='w-3' value={'Kids'} onChange={toggleCatogery} />Kids
             </p>
           </div>
         </div>
@@ -69,7 +83,7 @@ const Collection = () => {
           </div>
 
         </div>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-y-6'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-y-6 mb-40'>
           {allProducts.map((item, index) => (
             <ProductItems key={index} id={item.id} image={item.image} name={item.name} price={item.price} />
           ))
@@ -79,6 +93,6 @@ const Collection = () => {
 
     </div >
   )
-}
+ }
 
 export default Collection
