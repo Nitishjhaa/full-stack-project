@@ -13,11 +13,11 @@ const Collection = () => {
   const [subCatogery, setSubCatogery] = useState([])
 
   const toggleCatogery = (e) => {
-    if(catogery.includes(e.target.value)) {
+    if (catogery.includes(e.target.value)) {
       setCatogery(prev => prev.filter(item => item !== e.target.value))
     }
     else {
-      setCatogery( prev => [...prev, e.target.value])
+      setCatogery(prev => [...prev, e.target.value])
     }
   }
 
@@ -25,9 +25,14 @@ const Collection = () => {
     setAllProducts(products)
   }, [])
 
-  useEffect(() => {
-    console.log(catogery)
-  }, [catogery])
+  const toggleSubCatogery = (e) => {
+    if (subCatogery.includes(e.target.value)) {
+      setSubCatogery(prev => prev.filter(item => item !== e.target.value))
+    }
+    else {
+      setSubCatogery(prev => [...prev, e.target.value])
+    }
+  }
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 border-t' >
@@ -57,13 +62,13 @@ const Collection = () => {
           <p className='uppercase font-semibold text-sm mb-3'>Type</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Topwear'} />Topwear
+              <input type="checkbox" name="" id="" className='w-3' value={'Topwear'} onChange={toggleSubCatogery} />Topwear
             </p>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Bottomwear'} />Bottomwear
+              <input type="checkbox" name="" id="" className='w-3' value={'Bottomwear'} onChange={toggleSubCatogery} />Bottomwear
             </p>
             <p className='flex gap-2 font-semibold'>
-              <input type="checkbox" name="" id="" className='w-3' value={'Winterwear'} />Winterwear
+              <input type="checkbox" name="" id="" className='w-3' value={'Winterwear'} onChange={toggleSubCatogery} />Winterwear
             </p>
           </div>
         </div>
@@ -93,6 +98,6 @@ const Collection = () => {
 
     </div >
   )
- }
+}
 
 export default Collection
