@@ -34,6 +34,15 @@ const Collection = () => {
     }
   }
 
+  const applyFilter = () => {
+    let productsCopy = products.slice();
+
+    if(catogery.length > 0) {
+      productsCopy = productsCopy.filter(item => catogery.includes(item.catogery) )
+    }
+
+  }
+
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 border-t' >
 
