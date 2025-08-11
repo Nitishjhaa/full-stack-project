@@ -40,8 +40,16 @@ const Collection = () => {
     if(catogery.length > 0) {
       productsCopy = productsCopy.filter(item => catogery.includes(item.catogery) )
     }
-
+    
   }
+
+  useEffect(() => {
+    setAllProducts(products)
+  })
+
+  useEffect(() => {
+    applyFilter();
+  },[catogery, subCatogery])
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 border-t' >
