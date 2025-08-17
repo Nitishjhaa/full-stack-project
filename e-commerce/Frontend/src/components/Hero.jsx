@@ -1,9 +1,13 @@
-import React from 'react'
-import { assets } from '../assets/frontend_assets/assets'
+import React, { useContext } from 'react'
+import { assets } from '../assets/frontend_assets/assets';
+import { ShopContext } from '../context/ShopContext';
 
 const Hero = () => {
+
+  const {showSearch} = useContext(ShopContext)
+
   return (
-    <div className='flex flex-col md:flex-row border border-gray-400 h-130'>
+    <div className={`flex flex-col md:flex-row border border-gray-400 h-130 ${showSearch ? 'mt-10' : 'mt-0'} `}>
       <div className='w-1/2 flex h-full justify-center items-center flex-col max-md:w-full max-md:mb-10 max-md:mt-10'>
         <div className='flex gap-2 mr-37 mb-4'>
           <p className='w-8 md:w-11 h-[1px] bg-[#414141] mt-3 '></p>

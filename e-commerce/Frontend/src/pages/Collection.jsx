@@ -68,9 +68,11 @@ const Collection = () => {
       case 'low-high':
         productsCopy = productsCopy.sort((a, b) => a.price - b.price);
         break;
+      
       case 'high-low':
         productsCopy = productsCopy.sort((a, b) => b.price - a.price);
         break;
+      
       default:
         break;
     }
