@@ -31,7 +31,6 @@ function App() {
           <Route path='/collection' element={<Collection />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/product' element={<Product />} />
           <Route path='/product/:productId' element={<Product />} />
           <Route path='/orders' element={<Orders />} />
           <Route path='/Place-order' element={<PlaceOrder />} />

@@ -6,7 +6,7 @@ import Title from '../components/Title'
 
 const Collection = () => {
 
-  const { products } = useContext(ShopContext)
+  const { products, search, showSearch } = useContext(ShopContext)
   const [showFilter, setShowFilter] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
   const [category, setcategory] = useState([]);
@@ -34,6 +34,10 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
+    if(showSearch && search) {
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter(item => category.includes(item.category));
     }
@@ -51,7 +55,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subcategory])
+  }, [category, subcategory, search, showSearch])
 
   useEffect(() => {
     let productsCopy = products.slice();
@@ -136,7 +140,7 @@ const Collection = () => {
         </div>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-y-6 mb-40'>
           {allProducts.map((item, index) => (
-            <ProductItems key={index} id={item.id} image={item.image} name={item.name} price={item.price} />
+            <ProductItems key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
           ))
           }
         </div>
