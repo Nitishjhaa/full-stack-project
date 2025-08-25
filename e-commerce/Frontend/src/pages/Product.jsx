@@ -5,8 +5,6 @@ const Product = () => {
 
   const { productId } = useParams();
 
-  console.log(productId)
-
   return (
     <div>
 
