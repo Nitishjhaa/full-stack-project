@@ -16,12 +16,8 @@ const Product = () => {
     products.map((i) => {
       if (i._id === productId) {
         setProductData(i);
-        console.log(i)
         setImage(i.image[0])
         return null;
-      }
-      else {
-
       }
     })
   }
@@ -69,15 +65,15 @@ const Product = () => {
             <h2>Select Sizes</h2>
             <div className='flex gap-2 mt-3'>
               {productData.sizes.map((i) => (
-                <div key={i} className={`w-10 h-10 flex justify-center items-center cursor-pointer ${size === i ? "border-2 border-red-500" : "border border-transparent"} bg-[#F3F4F6]`} onClick={() => setSize(i)}>
+                <div key={i} className={`w-10 h-10 flex justify-center items-center cursor-pointer ${size === i ? "bg-black text-white transition-colors duration-300" : "border border-transparent"} bg-[#F3F4F6]`} onClick={() => setSize(i)}>
                   {i}
                 </div>
               ))}
             </div>
           </div>
           <button className='mt-5 w-30 border h-10 bg-black rounded-sm text-white flex justify-center items-center hover:bg-white hover:text-black hover:border transition-colors duration-150 transition-border'>
-              Add To Cart
-            </button>
+            Add To Cart
+          </button>
         </div>
 
       </div>
