@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/frontend_assets/assets';
+import Title from '../components/Title';
 
 
 const Product = () => {
@@ -11,6 +12,7 @@ const Product = () => {
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
   const [size, setSize] = useState(null);
+  const [openTab, setOpenTab] = useState("tab1")
 
   const fetchProductData = async () => {
     products.map((i) => {
@@ -76,6 +78,59 @@ const Product = () => {
           </button>
         </div>
 
+      </div>
+      {/* description */}
+      <div className='mx-auto  mt-10'>
+        {/* Tabs Header */}
+        <div className="flex ">
+          <button
+            onClick={() => setOpenTab("tab1")}
+            className={`px-4 py-2 w-1/6 text-center ${openTab === "tab1"
+              ? "bg-gray-300 text-gray-600 font-semibold transition-colors duration-300"
+              : "bg-gray-100 text-gray-700"
+              }`}
+          >
+            Description
+          </button>
+          <button
+            onClick={() => setOpenTab("tab2")}
+            className={`px-4 py-2 w-1/6 text-center ${openTab === "tab2"
+              ? "bg-gray-300 text-gray-600 font-semibold transition-colors duration-300"
+              : "bg-gray-100 text-gray-700"
+              }`}
+          >
+            Reviews
+          </button>
+        </div>
+
+        {/* Tabs Content */}
+        <div className="p-4 border border-gray-400">
+          {openTab === "tab1"
+            &&
+            <div className='p-5'>
+              <p className='text-neutral-600 text-sm'>
+                An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as a virtual marketplace where businesses and individuals can showcase their products, interact with customers, and conduct transactions without the need for a physical presence. E-commerce websites have gained immense popularity due to their convenience, accessibility, and the global reach they offer.
+                <br /><br />
+                E-commerce websites typically display products or services along with detailed descriptions, images, prices, and any available variations (e.g., sizes, colors). Each product usually has its own dedicated page with relevant information.
+              </p>
+            </div>
+          }
+          {openTab === "tab2"
+            &&
+            <div>
+              Review goes here
+            </div>
+          }
+        </div>
+      </div>
+
+      <div className='mt-10'>
+        <div className='text-center'>
+          <Title text1={'Related'} text2={'Products'} />
+          <div className='border h-[50vh]'>
+            
+          </div>
+        </div>
       </div>
     </div>
   ) : <div className='opacity-0'></div>
