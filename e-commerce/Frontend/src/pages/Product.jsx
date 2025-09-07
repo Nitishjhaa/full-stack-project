@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/frontend_assets/assets';
 import Title from '../components/Title';
+import RelatedProducts from '../components/RelatedProducts';
 
 
 const Product = () => {
 
   const { productId } = useParams();
-  const { products, Indcurrency } = useContext(ShopContext);
+  const { products, Indcurrency, cartItems, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
   const [size, setSize] = useState(null);
@@ -73,7 +74,7 @@ const Product = () => {
               ))}
             </div>
           </div>
-          <button className='mt-5 w-30 border h-10 bg-black rounded-sm text-white flex justify-center items-center hover:bg-white hover:text-black hover:border transition-colors duration-150 transition-border'>
+          <button className='mt-5 w-30 border h-10 bg-black rounded-sm text-white flex justify-center items-center hover:bg-white hover:text-black hover:border transition-colors duration-150 transition-border' onClick={() => addToCart(productData._id, size)}>
             Add To Cart
           </button>
         </div>
@@ -127,8 +128,10 @@ const Product = () => {
       <div className='mt-10'>
         <div className='text-center'>
           <Title text1={'Related'} text2={'Products'} />
-          <div className='border h-[50vh]'>
-            
+          <div className='h-[50vh] mt-5'>
+            <div className=''>
+              <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
+            </div>
           </div>
         </div>
       </div>
