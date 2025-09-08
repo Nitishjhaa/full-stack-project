@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
+import { toast } from "react-toastify";
 
 const ShopContext = createContext();
 
@@ -13,7 +14,7 @@ const ShopContextProvider = (props) => {
 
     const addToCart = async (itemId, size) => {
         if (!size) {
-            alert("Please select a size before adding to cart!");
+            toast.error('Select Procuct Size');
             return;
         }
 
@@ -26,14 +27,22 @@ const ShopContextProvider = (props) => {
         cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
 
         setCartItems(cartData);
+        toast.success('Item Added to Cart')
     };
 
-    useEffect(() => {
-        console.log(cartItems)
-        // addToCart()
-    }, [cartItems])
 
-    const value = { products, Indcurrency, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, addToCart };
+    const getCartCount = () => {
+        let count = 0;
+        for (let itemId in cartItems) {
+            for (let size in cartItems[itemId]) {
+                count += cartItems[itemId][size];
+            }
+        }
+        return count;
+    };
+
+
+    const value = { products, Indcurrency, currency, delivery_fee, search, setSearch, showSearch, setShowSearch, cartItems, addToCart, getCartCount };
 
     return (
         <ShopContext.Provider value={value}>

@@ -1,16 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { assets } from '../assets/frontend_assets/assets';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 
 export default function Navbar() {
 
+  const { setShowSearch, showSearch, getCartCount } = useContext(ShopContext)
+
   const [isOpen, setInOpen] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const {setShowSearch, showSearch} = useContext(ShopContext)
-
-  const location = useLocation();
 
   const links = [
     { path: '/', label: 'Home' },
@@ -47,7 +46,7 @@ export default function Navbar() {
           <div className='group relative'>
             <img onClick={() => setInOpen((prev) => !prev)} src={assets.profile_icon} className='w-5 cursor-pointer' alt="" />
             {isOpen && (
-              <div className='relative'>
+              <div className='relative '>
                 <div className='w-[100vw] h-[90vh] -right-[11vw] absolute'>
 
                   <div className='flex flex-col gap-5 justify-center items-center h-3/4'>
@@ -72,7 +71,7 @@ export default function Navbar() {
           </div>
           <Link to='/cart' >
             <img src={assets.cart_icon} className='w-5 cursor-pointer' alt="" />
-            <p className='w-4 h-4 -mt-2.5 ml-2 text-xs bg-black text-white rounded-full flex justify-center items-center z-10'>10</p>
+            <p className='w-4 h-4 -mt-2.5 ml-2 text-xs bg-black text-white rounded-full flex justify-center items-center z-10'>{getCartCount()}</p>
 
           </Link>
 
