@@ -1,23 +1,53 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
 import { ShopContext } from '../context/ShopContext'
 
 const Cart = () => {
 
-  const [cartProduct, setCartProduct] = useState([])
-
   const { products, Indcurrency, cartItems } = useContext(ShopContext);
 
-  const cartProducts = () => {
-    const CartProducts = products.filter((e)=> e._id === cartItems)
-    setCartProduct(cartProducts)
-  }
-  
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    const tempData = [];
+
+    for (const productId in cartItems) {
+      for (const size in cartItems[productId]) {
+        if (cartItems[productId][size] > 0) {
+          const productData = products.find((p) => p._id === productId);
+          console.log(productData)
+
+          if (productData) {
+            tempData.push({
+              _id: productId,
+              size,
+              quantity: cartItems[productId][size],
+              product: productData,
+            });
+          }
+        }
+      }
+    }
+
+    setCartData(tempData);
+  }, [cartItems, products]);
 
   return (
     <div className='flex w-full h-[85vh] '>
       <div className='flex-1 my-20 p-5'>
         <Title text1={"Your"} text2={"Cart"} />
+        <div>
+          {
+            cartData.map((item, idx) => {
+
+              return (
+                <div key={idx} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_o.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
+                  
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
       <div className='flex-1 my-20 border border-gray-300 p-5'>
         <Title text1={"Cart"} text2={"Total"} />
