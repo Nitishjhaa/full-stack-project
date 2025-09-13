@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
 import { ShopContext } from '../context/ShopContext'
+import { assets } from '../assets/frontend_assets/assets';
 
 const Cart = () => {
 
@@ -14,17 +15,11 @@ const Cart = () => {
     for (const productId in cartItems) {
       for (const size in cartItems[productId]) {
         if (cartItems[productId][size] > 0) {
-          const productData = products.find((p) => p._id === productId);
-          console.log(productData)
-
-          if (productData) {
-            tempData.push({
-              _id: productId,
-              size,
-              quantity: cartItems[productId][size],
-              product: productData,
-            });
-          }
+          tempData.push({
+            _id: productId,
+            size: size,
+            quantity: cartItems[productId][size]
+          })
         }
       }
     }
@@ -40,9 +35,22 @@ const Cart = () => {
           {
             cartData.map((item, idx) => {
 
+              const productData = products.find((product) => product._id === item._id)
               return (
-                <div key={idx} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_o.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
-                  
+                <div key={idx} className='py-4 border-t border-b border-gray-400 text-gray-700 grid grid-cols-[4fr_0.5fr_o.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
+                  <div className='flex items-start gap-6'>
+                    <img src={productData.image[0]} alt="" className='w-16 sm:w-20' />
+                    <div className='flex flex-col gap-3'>
+                      <p className='whitespace-nowrap text-medium'>{productData.name}</p>
+                      <p className='whitespace-nowrap text-medium'> {Indcurrency} {productData.price}</p>
+                      <div className='flex gap-5'>
+                        <div className="flex-1"><p className='whitespace-nowrap text-sm '> Size: <span className='p-2 border border-gray-300'>{item.size}</span> </p></div>
+                        <div className="flex-1"><p className='whitespace-nowrap text-sm'> Quantity: <span> <input className='w-10' type="number" defaultValue={item.quantity}  />
+                        </span></p></div>
+                      </div>
+                    </div>
+                  </div>
+                    <img src={assets.bin_icon} alt="" className='w-4  sm:w-5 cursor-pointer' />
                 </div>
               )
             })
